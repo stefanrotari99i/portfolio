@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'Cascadia';
+  src: url('/public/Cascadia.ttf') format('truetype');
+}
+
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
@@ -25,3 +30,32 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+
+
+.text {
+  @apply text-gray-300 text-lg;
+}
+
+/* power shell comment style  */
+.comment {
+  @apply text-green-500 text-lg;
+}
+
+/* Scroll Bar Terminal Style */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgb(var(--background-start-rgb));
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgb(var(--background-end-rgb));
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Terminal Style */
