@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+import TerminalHeaderBar from "./TerminalHeaderBar";
 
 const AVAILABLE_COMMANDS = [
     {
@@ -273,18 +274,7 @@ const Terminal = () => {
 
     return (
         <div className=" w-full">
-            <div className="flex flex-row justify-between bg-black text-white w-full h-8">
-                <div className="flex flex-row">
-                    <div className="bg-red-500 w-3 h-3 rounded-full m-1"></div>
-                    <div className="bg-yellow-500 w-3 h-3 rounded-full m-1"></div>
-                    <div className="bg-green-500 w-3 h-3 rounded-full m-1"></div>
-                </div>
-                <div className="flex flex-row">
-                    <div className="bg-black w-3 h-3 rounded-full m-1"></div>
-                    <div className="bg-black w-3 h-3 rounded-full m-1"></div>
-                    <div className="bg-black w-3 h-3 rounded-full m-1"></div>
-                </div>
-            </div>
+            <TerminalHeaderBar />
             <div className="flex flex-col mb-2">
                 <p className="text-white text-lg">Rotari Stefan Portfolio [Version 1.0.0]</p>
                 <p className="text-white text-lg">(c) Rotari Stefan. All rights reserved.</p>
