@@ -1,6 +1,11 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import TerminalHeaderBar from "./TerminalHeaderBar";
+import TerminalInput from "./TerminalInput";
+import About from "./About";
+import Help from "./Help";
+import Skills from "./Skills";
+import Contact from "./Contact";
 
 const AVAILABLE_COMMANDS = [
     {
@@ -47,54 +52,120 @@ const MY_SKILLS = [
     {
         title: "Frontend",
         skills: [
-            "HTML",
-            "CSS",
-            "JavaScript",
-            "React",
-            "Next.js",
-            "Tailwind CSS",
-            "Bootstrap",
-            "Material UI",
-            "Styled Components",
-            "Framer Motion",
-            "React Spring",
-            "React Router",
-            "Redux",
-            "React Redux",
-            "Redux Toolkit",
-            "Redux Thunk",
-            "Redux Saga",
+            {
+                title: "HTML",
+                level: 90,
+            },
+            {
+                title: "CSS",
+                level: 90,
+            },
+            {
+                title: "JavaScript",
+                level: 90,
+            },
+            {
+                title: "React.js",
+                level: 90,
+            },
+            {
+                title: "Next.js",
+                level: 90,
+            },
+            {
+                title: "Tailwind CSS",
+                level: 90,
+            },
+            {
+                title: "Bootstrap",
+                level: 90,
+            },
+            {
+                title: "Material UI",
+                level: 90,
+            },
+            {
+                title: "SASS",
+                level: 90,
+            },
+            {
+                title: "Styled Components",
+                level: 90,
+            },
+            {
+                title: "Redux",
+                level: 90,
+            },
+            {
+                title: "React Router",
+                level: 90,
+            },
+            {
+                title: "React Context",
+                level: 90,
+            },
         ],
     },
     {
         title: "Backend",
         skills: [
-            "Node.js",
-            "Express.js",
-            "MongoDB",
-            "Mongoose",
-            "MySQL",
-            "Sequelize",
-            "PostgreSQL",
+            {
+                title: "Node.js",
+                level: 90,
+            },
+            {
+                title: "Express.js",
+                level: 90,
+            },
+            {
+                title: "MongoDB",
+                level: 90,
+            },
+            {
+                title: "Mongoose",
+                level: 90,
+            },
         ],
     },
     {
         title: "Other",
         skills: [
-            "Git",
-            "GitHub",
-            "GitLab",
-            "Heroku",
-            "Netlify",
-            "Vercel",
-            "Firebase",
-            "Figma",
-            "Adobe XD",
-            "Adobe Photoshop",
-            "Adobe Illustrator",
-            "Adobe Premiere Pro",
-            "Adobe After Effects",
-            "Microsoft Office",
+            {
+                title: "Git",
+                level: 90,
+            },
+            {
+                title: "GitHub",
+                level: 90,
+            },
+            {
+                title: "GitLab",
+                level: 90,
+            },
+            {
+                title: "Linux",
+                level: 90,
+            },
+            {
+                title: "Windows",
+                level: 90,
+            },
+            {
+                title: "Visual Studio Code",
+                level: 90,
+            },
+            {
+                title: "Figma",
+                level: 90,
+            },
+            {
+                title: "Adobe Photoshop",
+                level: 90,
+            },
+            {
+                title: "Adobe Illustrator",
+                level: 50,
+            },
         ],
     },
 ];
@@ -136,75 +207,17 @@ const CONTACT_INFORMATION = [
 
 const Terminal = () => {
     const [command, setCommand] = useState("");
+    const [placeholder, setPlaceholder] = useState("");
     const [history, setHistory] = useState([]);
     const [historyIndex, setHistoryIndex] = useState(0);
     const [cursor, setCursor] = useState(0);
+    const ref = useRef(null);
 
     const COMMANDS = {
-        HELP: () => {
-            return (
-                <div className="flex flex-col w-full">
-                    <div>If you want to know more about me, type:</div>
-                    {AVAILABLE_COMMANDS.map((command, index) => (
-                        <div key={index} className="flex flex-row w-full">
-                            <p className="mr-2 w-1/6">
-                                {command.command.toUpperCase()}
-                            </p>
-                            <p className="">
-                                {command.description}
-                            </p>
-                        </div>
-                    ))}
-                </div>
-            );
-        },
-        ABOUT: () => {
-            return (
-                <div className="flex flex-col w-full">
-                    <p className="text-green-500 text-lg">
-                        {/* ASCII text generated by http://patorjk.com/software/taag/
-                        <pre>{`
-█████╗ ██████╗  ██████╗ ██╗   ██╗████████╗    ███╗   ███╗███████╗    
-██╔══██╗██╔══██╗██╔═══██╗██║   ██║╚══██╔══╝    ████╗ ████║██╔════╝    
-███████║██████╔╝██║   ██║██║   ██║   ██║       ██╔████╔██║█████╗      
-██╔══██║██╔══██╗██║   ██║██║   ██║   ██║       ██║╚██╔╝██║██╔══╝      
-██║  ██║██████╔╝╚██████╔╝╚██████╔╝   ██║       ██║ ╚═╝ ██║███████╗    
-╚═╝  ╚═╝╚═════╝  ╚═════╝  ╚═════╝    ╚═╝       ╚═╝     ╚═╝╚══════╝                                                                                          
-                        `}</pre> */}
-                    </p>
-                    {ABOUT_ME.map((about, index) => (
-                        <p key={index}>{about}</p>
-                    ))}
-                </div>
-            );
-        },
-
-        SKILLS: () => {
-            return (
-                <div>
-                    {MY_SKILLS.map((skill, index) => (
-                        <div key={index}>
-                            <div>{skill.title}</div>
-                            {skill.skills.map((skill, index) => (
-                                <div key={index}>{skill}</div>
-                            ))}
-                        </div>
-                    ))}
-                </div>
-            );
-        },
-        CONTACT: () => {
-            return (
-                <div>
-                    {CONTACT_INFORMATION.map((contact, index) => (
-                        <div key={index}>
-                            <div>{contact.title}</div>
-                            <div>{contact.value}</div>
-                        </div>
-                    ))}
-                </div>
-            );
-        },
+        HELP: () => <Help commands={AVAILABLE_COMMANDS} />,
+        ABOUT: () => <About about={ABOUT_ME} />,
+        SKILLS: () => <Skills skills={MY_SKILLS} />,
+        CONTACT: () => <Contact contact={CONTACT_INFORMATION} />,
         EXIT: () => {
             window.close();
         },
@@ -214,6 +227,7 @@ const Terminal = () => {
             setHistoryIndex(0);
             setCursor(0);
         },
+        MESSAGE: () => {},
     };
 
     const handleKeyDown = (e) => {
@@ -247,6 +261,7 @@ const Terminal = () => {
     const handleChange = (e) => {
         setCommand(e.target.value);
         setCursor(e.target.selectionStart);
+        setPlaceholder("");
     };
 
     useEffect(() => {
@@ -276,50 +291,42 @@ const Terminal = () => {
         <div className=" w-full">
             <TerminalHeaderBar />
             <div className="flex flex-col mb-2">
-                <p className="text-white text-lg">Rotari Stefan Portfolio [Version 1.0.0]</p>
-                <p className="text-white text-lg">(c) Rotari Stefan. All rights reserved.</p>
+                <p className="text-white text-lg">
+                    Rotari Stefan Portfolio [Version 1.0.0]
+                </p>
+                <p className="text-white text-lg">
+                    (c) Rotari Stefan. All rights reserved.
+                </p>
             </div>
-            <div id="terminal" className="bg-black text-white w-full">
+            <div id="terminal" className=" text-white w-full">
                 {history.map((command, index) => (
                     <div key={index} className="flex-col w-full">
                         <div className="flex flex-row">
-                            <div className="text-green-500 text-lg">
+                            <p className="text-green-500 text-lg">
                                 guest@rotaristefan:~$
-                            </div>
+                            </p>
                             <div className="flex-grow">
-                                <div className="text-white text-lg ml-2">
+                                <p className="text-white text-lg ml-2">
                                     {command}
-                                </div>
+                                </p>
                             </div>
                         </div>
                         <div className="flex flex-row w-full">
-                            <div className="text-white text-lg w-full">
+                            <p className="text-white text-lg w-full">
                                 {COMMANDS[command.toUpperCase()]
                                     ? COMMANDS[command.toUpperCase()]()
                                     : "Command not found. Type HELP to see available commands."}
-                            </div>
+                            </p>
                         </div>
                     </div>
                 ))}
-                {/* terminal body input */}
-                <div className="flex flex-col">
-                    <div className="flex">
-                        <div className="text-green-500 text-lg">
-                            guest@rotaristefan:~$
-                        </div>
-                        <div className="flex-grow">
-                            <form className="flex flex-row">
-                                <input
-                                    id="command"
-                                    className="bg-black text-white text-lg ml-2 w-full focus:outline-none"
-                                    value={command}
-                                    onChange={handleChange}
-                                    onKeyDown={handleKeyDown}
-                                />
-                            </form>
-                        </div>
-                    </div>
-                </div>
+                <TerminalInput
+                    ref={ref}
+                    command={command}
+                    handleChange={handleChange}
+                    handleKeyDown={handleKeyDown}
+                    placeholder={placeholder}
+                />
             </div>
         </div>
     );
